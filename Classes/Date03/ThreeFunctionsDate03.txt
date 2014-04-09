@@ -1,0 +1,50 @@
+// get month name return the value in the private member 
+string Date :: getMonthName()
+{
+       string MonthName[12] = {"January","Feburary","March","April","May",                            
+                               "June","July","August","September","October",
+                               "November","December"};                                             // initalizing the array for getting the month name
+       return MonthName[(getMonth()-1)];
+}
+
+// calculating the day of week return the value in the private member 
+char* Date :: getDayofWeek()
+{      
+       // declare the variables
+       int totaldays=0;           
+       Date d1;
+       int x;
+       
+       // initalize the array to get the day of the week
+       char DayofWeek[7][11]={"Sunday",
+                              "Monday",
+                              "Tuesday",
+                              "Wednesday",
+                              "Thursday",
+                              "Friday",
+                              "Saturday"};
+        
+       // using the for loop to get the the array                      
+       for(x =1900; x< getYear(); x++)
+       {
+               totaldays +=365;
+               d1.setYear(x);
+               if(d1.calcLeapYear())
+               totaldays++;
+       }
+       totaldays = totaldays + calcDayOfYear();
+       return &DayofWeek[totaldays%7][0];
+}
+ 
+// calculating the day of the year return the value in the private member 
+int Date :: calcDayOfYear()
+{
+    int NumDays[14]={0,0,31,59,90,120,151,181,212,243,273,304,334,365};
+    int DayofYear;
+    DayofYear = NumDays[getMonth()]+getDay();
+    if (calcLeapYear() & getMonth()>2)
+    {
+       DayofYear++;
+    }
+    return DayofYear;
+}  
